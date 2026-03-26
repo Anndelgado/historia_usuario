@@ -4,11 +4,9 @@ from files import *
 inventory = []
 AUTO_PATH = "inventory_auto.csv"
 
-# 🔥 Control de persistencia
+#Control de persistencia
 data_loaded = False
 
-
-# ---------------- VALIDADORES ----------------
 def get_float(msg):
     valid = False
     while not valid:
@@ -37,66 +35,50 @@ def get_int(msg):
     return value
 
 
-# ---------------- MENÚ ----------------
+# Menu
 running = True
 
 while running:
 
-    print("\n--- MENU ---")
-    print("1. Add")
-    print("2. Show")
-    print("3. Search")
-    print("4. Update")
-    print("5. Delete")
-    print("6. Statistics")
-    print("7. Sort")
-    print("8. Save CSV")
-    print("9. Load CSV")
-    print("10. Exit")
+    print("\n--- MENU ---\n 1. Add\n 2. Show\n 3. Search\n 4. Update\n 5. Delete\n 6. Statistics\n 7. Sort\n 8. Save CSV\n 9. Load CSV\n 10. Exit")
 
     option = input("Choose: ")
 
-    # ---------------- AGREGAR ----------------
     if option == "1":
         name = input("Name: ")
         price = get_float("Price: ")
         quantity = get_int("Quantity: ")
         add_product(inventory, name, price, quantity)
 
-    # ---------------- MOSTRAR ----------------
     elif option == "2":
         show_inventory(inventory)
 
-    # ---------------- BUSCAR ----------------
     elif option == "3":
         if not data_loaded:
-            print("⚠️ You must load or save a CSV first.")
+            print("You must load or save a CSV first.")
         else:
             name = input("Search: ")
             print(search_product(inventory, name) or "Not found")
 
-    # ---------------- ACTUALIZAR ----------------
     elif option == "4":
         if not data_loaded:
-            print("⚠️ You must load or save a CSV first.")
+            print("You must load or save a CSV first.")
         else:
             name = input("Update: ")
             price = get_float("New price: ")
             quantity = get_int("New quantity: ")
             update_product(inventory, name, price, quantity)
 
-    # ---------------- ELIMINAR ----------------
     elif option == "5":
         if not data_loaded:
-            print("⚠️ You must load or save a CSV first.")
+            print("You must load or save a CSV first.")
         else:
             name = input("Delete: ")
             delete_product(inventory, name)
 
-    # ---------------- ESTADÍSTICAS ----------------
     elif option == "6":
         if not data_loaded:
-            print("⚠️ You must load or save a CSV first.")
+            print("You must load or save a CSV first.")
         else:
             stats = calculate_statistics(inventory)
             if stats:
@@ -108,21 +90,18 @@ while running:
             else:
                 print("Empty inventory.")
 
-    # ---------------- ORDENAR ----------------
     elif option == "7":
         if not data_loaded:
-            print("⚠️ You must load or save a CSV first.")
+            print("You must load or save a CSV first.")
         else:
             criteria = input("Sort by (price/quantity): ")
             sort_inventory(inventory, criteria)
 
-    # ---------------- GUARDAR ----------------
     elif option == "8":
         path = input("Path: ")
         save_csv(inventory, path)
-        data_loaded = True  # 🔥 activar validación
+        data_loaded = True  #activar validación
 
-    # ---------------- CARGAR ----------------
     elif option == "9":
         path = input("Path: ")
         new_data = load_csv(path)
@@ -140,12 +119,11 @@ while running:
                     else:
                         inventory.append(new)
 
-            data_loaded = True  # 🔥 activar validación
+            data_loaded = True  #activar validación
 
-    # ---------------- SALIR ----------------
     elif option == "10":
         save_csv(inventory, AUTO_PATH)
-        print("Auto-saved. Goodbye 👋")
+        print("Auto-saved. Bye")
         running = False
 
     else:
