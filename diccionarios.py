@@ -22,7 +22,7 @@ coders = {
     }
 }
 
-'''print(coders)
+print(coders)
 
 nombre = input("dig un nombre: ")
 
@@ -59,7 +59,6 @@ print(coder_encontrado)
 for j, k in coders.items():
     if k["id"] == busqueda_id:
         print("Encontrado")
-'''
 
 
 def buscar_elemento (coders, coder):
